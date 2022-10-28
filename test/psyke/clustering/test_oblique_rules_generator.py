@@ -1,5 +1,4 @@
 import unittest
-from psyke.clustering.orbit.container import Container
 from psyke.clustering.orbit.oblique_rules_generator import *
 from psyke.extraction.hypercubic.hypercube import ClosedCube
 

@@ -50,10 +50,11 @@ class ORBIt(Extractor):
                                               min_accuracy_increase, max_disequation_num=max_disequation_num)
         self.containers: List[Container] = []
 
-    def extract(self, dataframe: pd.DataFrame) -> Theory:
+    def extract(self, dataframe: pd.DataFrame, mapping=None) -> Theory:
         """
         extract theory out of a dataframe
         :param dataframe: dataframe containing as the last column the label representing the clusters
+        :param mapping: not supported
         :return:
         """
         self.containers = self.clustering.extract(dataframe=dataframe.iloc[:, :-1].join(
