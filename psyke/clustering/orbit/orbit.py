@@ -78,7 +78,7 @@ class ORBIt(Extractor):
 
     @property
     def n_oblique_rules(self):
-        return sum([len(c.diequations) for c in self.containers])
+        return sum([len(c.disequations) for c in self.containers])
 
     def _create_theory(self, dataframe: pd.DataFrame) -> Theory:
         new_theory = mutable_theory()
@@ -92,7 +92,7 @@ class ORBIt(Extractor):
                                       self.unscale(cube.output, dataframe.columns[-1]))
             body = cube.body(variables, self._ignore_dimensions(), self.unscale, self.normalization)
             new_theory.assertZ(clause(head, body))
-            disequations.append((cube.output, cube.diequations))
+            disequations.append((cube.output, cube.disequations))
         return new_theory, disequations
 
     @staticmethod
