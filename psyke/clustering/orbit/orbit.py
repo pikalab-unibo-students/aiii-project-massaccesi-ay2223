@@ -50,10 +50,11 @@ class ORBIt(Extractor):
                                               min_accuracy_increase, max_disequation_num=max_disequation_num)
         self.containers: List[Container] = []
 
-    def extract(self, dataframe: pd.DataFrame) -> Theory:
+    def extract(self, dataframe: pd.DataFrame, mapping=None) -> Theory:
         """
         extract theory out of a dataframe
         :param dataframe: dataframe containing as the last column the label representing the clusters
+        :param mapping: not supported
         :return:
         """
         self.containers = self.clustering.extract(dataframe=dataframe.iloc[:, :-1].join(
@@ -77,7 +78,7 @@ class ORBIt(Extractor):
 
     @property
     def n_oblique_rules(self):
-        return sum([len(c.diequations) for c in self.containers])
+        return sum([len(c.disequations) for c in self.containers])
 
     def _create_theory(self, dataframe: pd.DataFrame) -> Theory:
         new_theory = mutable_theory()
@@ -91,7 +92,7 @@ class ORBIt(Extractor):
                                       self.unscale(cube.output, dataframe.columns[-1]))
             body = cube.body(variables, self._ignore_dimensions(), self.unscale, self.normalization)
             new_theory.assertZ(clause(head, body))
-            disequations.append((cube.output, cube.diequations))
+            disequations.append((cube.output, cube.disequations))
         return new_theory, disequations
 
     @staticmethod

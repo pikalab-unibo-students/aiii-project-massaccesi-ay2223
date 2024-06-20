@@ -98,9 +98,9 @@ def generate_container(whole_dataframe: pd.DataFrame,
             convex_hulls[(col_i_name, col_j_name)] = c_h
 
     if remove_dimensions:
-        new_container = Container(dimensions, disequations, convex_hulls=(convex_hulls, mode_cluster))
+        new_container = Container(dimensions, disequations)
     else:
-        new_container = Container(original_dimensions, disequations, convex_hulls=(convex_hulls, mode_cluster))
+        new_container = Container(original_dimensions, disequations)
     return new_container
 
 
